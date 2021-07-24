@@ -1,14 +1,23 @@
 const path = require('path');
 const router = require('express').Router();
-
-
-router.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
+const notes = require("../public/assets/js/index");
+//make get to notes to make new note and delete olds
+router.get("/notes", function(req, res){
+    notes.getNotes()
+    .then(notes => res.json(notes))
+    .catch(err => res.status(500).json(err));
+})
+router.post("/notes", function(req, res){
+    notes.addNotes(req.body)
+    .then(notes => res.json(notes))
+    .catch(err => res.status(500).json(err));
 })
 
-router.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
 
+router.delete("/notes/:id", function(req, res){
+    notes.removeNote(req.params.id)
+    .then(() => res.json({ok: true}))
+    .catch(err => res.status(500).json(err));
 })
 
 module.exports = router;
