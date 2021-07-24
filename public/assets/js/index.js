@@ -1,23 +1,20 @@
-  let noteTitle = document.querySelector('.note-title');
-  let noteText = document.querySelector('.note-textarea');
-  let saveNoteBtn = document.querySelector('.save-note');
- let  newNoteBtn = document.querySelector('.new-note');
-  let noteList = document.querySelectorAll('.list-container .list-group');
-// let window = {};
-// let foo = null;
-// if (typeof window !== "undefined") {
-//   foo = window.localStorage.getItem("foo");
-// };
+
+
+let noteTitle;
+let noteText;
+let saveNoteBtn;
+let newNoteBtn;
+let noteList;
 
 
 
-// if (window.location.pathname === '/notes') {
-//   noteTitle = document.querySelector('.note-title');
-//   noteText = document.querySelector('.note-textarea');
-//   saveNoteBtn = document.querySelector('.save-note');
-//   newNoteBtn = document.querySelector('.new-note');
-//   noteList = document.querySelectorAll('.list-container .list-group');
-// }
+if (window.location.pathname === '/notes') {
+  noteTitle = document.querySelector('.note-title');
+  noteText = document.querySelector('.note-textarea');
+  saveNoteBtn = document.querySelector('.save-note');
+  newNoteBtn = document.querySelector('.new-note');
+  noteList = document.querySelectorAll('.list-container .list-group');
+}
 
 // Show an element
 const show = (elem) => {
@@ -33,7 +30,7 @@ const hide = (elem) => {
 let activeNote = {};
 
 const getNotes = () =>
-  fetch('/api/notes', {
+  fetch(`/api/notes`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +38,7 @@ const getNotes = () =>
   });
 
 const saveNote = (note) =>
-  fetch('/api/notes', {
+  fetch(`/api/notes`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -188,3 +185,5 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+
+// module.exports = getAndRenderNotes();
